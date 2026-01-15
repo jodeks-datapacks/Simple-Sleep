@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew:*)",
+      "Bash(echo:*)",
+      "Bash(export JAVA_HOME=\"/mnt/c/Program Files/Eclipse Adoptium/jdk-25.0.1.8-hotspot\")",
+      "Bash(export JAVA_HOME=\"/c/Program Files/Eclipse Adoptium/jdk-25.0.1.8-hotspot\")",
+      "WebFetch(domain:support.hytale.com)",
+      "WebSearch",
+      "Bash(jar -tf:*)",
+      "Bash(java:*)",
+      "Bash(export JAVA_HOME=\"\")",
+      "Bash(javap:*)",
+      "WebFetch(domain:hytalemodding.dev)",
+      "WebFetch(domain:github.com)",
+      "Bash(jar tf:*)",
+      "Bash(findstr:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git merge:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git rm:*)"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "Group": "Jodek",
+  "Name": "Simple Sleep",
+  "Version": "1.0.0",
+  "Description": "Configure the percentage of players that need to sleep to skip the night",
+  "Authors": [
+    {
+      "Name": "Jodek",
+      "Email": "",
+      "Url": "https://www.curseforge.com/members/jodek/projects"
+    }
+  ],
+  "Website": "https://github.com/yourusername/hytale-plugin-template",
+  "Main": "com.jodek.simplesleep.SimpleSleep",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false
+}
