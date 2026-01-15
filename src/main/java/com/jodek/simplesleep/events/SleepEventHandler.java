@@ -145,23 +145,23 @@ public class SleepEventHandler {
 
         for (PlayerRef playerRef : playerRefs) {
             Ref<EntityStore> entityRef = playerRef.getReference();
-            if (entityRef == null) {
-                continue;
-            }
+            if (entityRef == null) continue;
 
             PlayerSomnolence somnolence = store.getComponent(entityRef, PlayerSomnolence.getComponentType());
-            if (somnolence == null) {
-                continue;
-            }
+            if (somnolence == null) continue;
 
             PlayerSleep sleepState = somnolence.getSleepState();
 
-            // Only count Slumber for night skip
             if (sleepState instanceof PlayerSleep.Slumber) {
                 sleepingCount++;
             }
-        }
 
+            else if (sleepState instanceof PlayerSleep.NoddingOff noddingOff) {
+                if (Instant.now().isAfter(noddingOff.realTimeStart().plusMillis(3150L))) {
+                    sleepingCount++;
+                }
+            }
+        }
         return sleepingCount;
     }
 
@@ -182,10 +182,10 @@ public class SleepEventHandler {
         Instant now = timeResource.getGameTime();
         Instant wakeUp = computeWakeupInstant(now, wakeUpHour);
 
-        // Sets game time to morning
+        // Sets game time to morning (this triggers the night skip)
         timeResource.setGameTime(wakeUp, world, store);
 
-        // Wakes up all players
+        // Wake up all sleeping players
         for (PlayerRef playerRef : world.getPlayerRefs()) {
             Ref<EntityStore> entityRef = playerRef.getReference();
             if (entityRef == null) {
@@ -199,6 +199,7 @@ public class SleepEventHandler {
 
             PlayerSleep sleepState = somnolence.getSleepState();
 
+            // Set sleeping players to MorningWakeUp state
             if (sleepState instanceof PlayerSleep.NoddingOff || sleepState instanceof PlayerSleep.Slumber) {
                 PlayerSomnolence wakeUpState = new PlayerSomnolence(new PlayerSleep.MorningWakeUp(wakeUp));
                 store.putComponent(entityRef, PlayerSomnolence.getComponentType(), wakeUpState);
